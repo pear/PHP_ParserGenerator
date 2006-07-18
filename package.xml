@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.4.9" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>PHP_ParserGenerator</name>
+ <channel>pear.php.net</channel>
+ <summary>translate grammar files in Lemon Parser Generator format into a PHP 5 parser</summary>
+ <description>
+  Translate a grammar file in the lemon parser generator format
+  into a PHP 5-based parser
+  
+  There are a few PHP-specific changes to the lemon parser generator.
+  
+  - %extra_argument is removed, as class constructor can be used to
+    pass in extra information
+  - %token_type and company are irrelevant in PHP, and so are removed
+  - %declare_class is added to define the parser class name and any
+    implements/extends information
+  - %include_class is added to allow insertion of extra class information
+    such as constants, a class constructor, etc.
+
+  Other changes make the parser more robust, and also make reporting
+  syntax errors simpler.  Detection of expected tokens eliminates some
+  problematic edge cases where an unexpected token could cause the parser
+  to simply accept input.
+  
+  Otherwise, the file format is identical to the Lemon parser generator
+ </description>
+ <lead>
+  <name>Greg Beaver</name>
+  <user>cellog</user>
+  <email>cellog@php.net</email>
+  <active>yes</active>
+ </lead>
+ <date>2006-07-02</date>
+ <time>14:28:48</time>
+ <version>
+  <release>0.1.1</release>
+  <api>0.1.0</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+ <notes>update to New BSD license (no code changes)</notes>
+ <contents>
+  <dir baseinstalldir="PHP" name="/">
+   <dir name="ParserGenerator">
+    <file name="Action.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="ActionTable.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="Config.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="Data.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="Parser.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="PropagationLink.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="Rule.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="State.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="Symbol.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="cli.php" role="php"/>
+   </dir> <!-- /ParserGenerator -->
+   <file name="LICENSE.txt" role="doc"/>
+   <file name="Lempar.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file name="ParserGenerator.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file name="phplemon.bat" role="script" baseinstalldir="">
+    <tasks:replace from="@php-bin@" to="php_bin" type="pear-config"/>
+    <tasks:replace from="@php-dir@" to="php_dir" type="pear-config"/>
+    <tasks:windowseol/>
+   </file>
+   <file name="phplemon" role="script" baseinstalldir="">
+    <tasks:replace from="@php-bin@" to="php_bin" type="pear-config"/>
+    <tasks:replace from="@php-dir@" to="php_dir" type="pear-config"/>
+    <tasks:unixeol/>
+   </file>
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.1.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.3</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease/>
+ <changelog>
+  <release>
+   <version>
+    <release>0.1.0</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2006-06-24</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License 3.01</license>
+   <notes>initial release</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.1.1</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2006-07-02</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>update to New BSD license (no code changes)</notes>
+  </release>
+ </changelog>
+</package>

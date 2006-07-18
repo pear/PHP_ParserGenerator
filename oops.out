@@ -1,0 +1,18 @@
+State 0:
+          common_scalar ::= * T_LNUMBER|T_DNUMBER|T_CONSTANT_ENCAPSED_STRING|T_LINE|T_FILE|T_CLASS_C|T_METHOD_C|T_FUNC_C
+
+                     T_LNUMBER shift  1
+                     T_DNUMBER shift  1
+    T_CONSTANT_ENCAPSED_STRING shift  1
+                        T_LINE shift  1
+                        T_FILE shift  1
+                     T_CLASS_C shift  1
+                    T_METHOD_C shift  1
+                      T_FUNC_C shift  1
+                 common_scalar accept
+
+State 1:
+      (0) common_scalar ::= T_LNUMBER|T_DNUMBER|T_CONSTANT_ENCAPSED_STRING|T_LINE|T_FILE|T_CLASS_C|T_METHOD_C|T_FUNC_C *
+
+                     {default} reduce 0
+
