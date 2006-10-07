@@ -82,13 +82,13 @@
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file name="phplemon.bat" role="script" baseinstalldir="">
-    <tasks:replace from="@php-bin@" to="php_bin" type="pear-config"/>
-    <tasks:replace from="@php-dir@" to="php_dir" type="pear-config"/>
+    <tasks:replace from="@php_bin@" to="php_bin" type="pear-config"/>
+    <tasks:replace from="@php_dir@" to="php_dir" type="pear-config"/>
     <tasks:windowseol/>
    </file>
    <file name="phplemon" role="script" baseinstalldir="">
-    <tasks:replace from="@php-bin@" to="php_bin" type="pear-config"/>
-    <tasks:replace from="@php-dir@" to="php_dir" type="pear-config"/>
+    <tasks:replace from="@php_bin@" to="php_bin" type="pear-config"/>
+    <tasks:replace from="@php_dir@" to="php_dir" type="pear-config"/>
     <tasks:unixeol/>
    </file>
   </dir> <!-- / -->
