@@ -30,10 +30,9 @@
   <email>cellog@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-07-18</date>
- <time>14:28:48</time>
+ <date>2006-10-12</date>
  <version>
-  <release>0.1.1</release>
+  <release>0.1.2</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -41,7 +40,7 @@
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>update to New BSD license (no code changes)</notes>
+ <notes>fix replacements in phplemon script in unix (Hartmut Holzgraefe) (no code changes)</notes>
  <contents>
   <dir baseinstalldir="PHP" name="/">
    <dir name="ParserGenerator">
@@ -130,6 +129,19 @@
    <date>2006-07-18</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>update to New BSD license (no code changes)</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.1.2</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2006-10-12</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>fix replacements in phplemon script in unix (Hartmut Holzgraefe) (no code changes)</notes>
   </release>
  </changelog>
 </package>
