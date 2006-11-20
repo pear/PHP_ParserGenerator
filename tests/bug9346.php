@@ -1,5 +1,5 @@
 <?php
-/* Driver template for the PHP_ParserGenerator parser generator. (PHP port of LEMON)
+/* Driver template for the PHP_ProtoParser_rGenerator parser generator. (PHP port of LEMON)
 */
 
 /**
@@ -8,19 +8,19 @@
  *
  * meta-data should be stored as an array
  */
-class ParseyyToken implements ArrayAccess
+class ProtoParser_yyToken implements ArrayAccess
 {
     public $string = '';
     public $metadata = array();
 
     function __construct($s, $m = array())
     {
-        if ($s instanceof ParseyyToken) {
+        if ($s instanceof ProtoParser_yyToken) {
             $this->string = $s->string;
             $this->metadata = $s->metadata;
         } else {
             $this->string = (string) $s;
-            if ($m instanceof ParseyyToken) {
+            if ($m instanceof ProtoParser_yyToken) {
                 $this->metadata = $m->metadata;
             } elseif (is_array($m)) {
                 $this->metadata = $m;
@@ -47,7 +47,7 @@ class ParseyyToken implements ArrayAccess
     {
         if ($offset === null) {
             if (isset($value[0])) {
-                $x = ($value instanceof ParseyyToken) ?
+                $x = ($value instanceof ProtoParser_yyToken) ?
                     $value->metadata : $value;
                 $this->metadata = array_merge($this->metadata, $x);
                 return;
@@ -57,7 +57,7 @@ class ParseyyToken implements ArrayAccess
         if ($value === null) {
             return;
         }
-        if ($value instanceof ParseyyToken) {
+        if ($value instanceof ProtoParser_yyToken) {
             if ($value->metadata) {
                 $this->metadata[$offset] = $value->metadata;
             }
@@ -84,7 +84,7 @@ class ParseyyToken implements ArrayAccess
  *      the information used by the action routines in the grammar.
  *      It is sometimes called the "minor" token.
  */
-class ParseyyStackEntry
+class ProtoParser_yyStackEntry
 {
     public $stateno;       /* The state-number */
     public $major;         /* The major token value.  This is the code
@@ -94,14 +94,13 @@ class ParseyyStackEntry
 };
 
 // code external to the class is included here
-%%
 
 // declare_class is output here
-%%
+#line 2 "bug9346.y"
+class ProtoParser#line 102 "bug9346.php"
 {
 /* First off, code is included which follows the "include_class" declaration
 ** in the input file. */
-%%
 
 /* Next is all token values, as class constants
 */
@@ -112,7 +111,13 @@ class ParseyyStackEntry
 **
 ** Each symbol here is a terminal symbol in the grammar.
 */
-%%
+    const NAME                           =  1;
+    const PAR_OPEN                       =  2;
+    const PAR_CLOSE                      =  3;
+    const RESOURCE                       =  4;
+    const YY_NO_ACTION = 11;
+    const YY_ACCEPT_ACTION = 10;
+    const YY_ERROR_ACTION = 9;
 
 /* Next are that tables used to determine what action to take based on the
 ** current state and lookahead token.  These tables are used to implement
@@ -164,7 +169,35 @@ class ParseyyStackEntry
 **                          shifting non-terminals after a reduce.
 **  self::$yy_default       Default action for each state.
 */
-%%
+    const YY_SZ_ACTTAB = 7;
+static public $yy_action = array(
+ /*     0 */    10,    2,    1,    3,    4,    6,    5,
+    );
+    static public $yy_lookahead = array(
+ /*     0 */     6,    7,    4,    2,    1,    3,    1,
+);
+    const YY_SHIFT_USE_DFLT = -3;
+    const YY_SHIFT_MAX = 4;
+    static public $yy_shift_ofst = array(
+ /*     0 */    -2,    5,    3,    2,    1,
+);
+    const YY_REDUCE_USE_DFLT = -7;
+    const YY_REDUCE_MAX = 0;
+    static public $yy_reduce_ofst = array(
+ /*     0 */    -6,
+);
+    static public $yyExpectedTokens = array(
+        /* 0 */ array(4, ),
+        /* 1 */ array(1, ),
+        /* 2 */ array(1, ),
+        /* 3 */ array(3, ),
+        /* 4 */ array(2, ),
+        /* 5 */ array(),
+        /* 6 */ array(),
+);
+    static public $yy_default = array(
+ /*     0 */     9,    9,    9,    9,    9,    8,    7,
+);
 /* The next thing included is series of defines which control
 ** various aspects of the generated parser.
 **    self::YYNOCODE      is a number which corresponds
@@ -180,7 +213,13 @@ class ParseyyStackEntry
 **    self::YYERRORSYMBOL is the code number of the error symbol.  If not
 **                        defined, then do no error processing.
 */
-%%
+    const YYNOCODE = 9;
+    const YYSTACKDEPTH = 100;
+    const YYNSTATE = 7;
+    const YYNRULE = 2;
+    const YYERRORSYMBOL = 5;
+    const YYERRSYMDT = 'yy0';
+    const YYFALLBACK = 0;
     /** The next table maps tokens into fallback tokens.  If a construct
      * like the following:
      * 
@@ -192,7 +231,6 @@ class ParseyyStackEntry
      * the parse is retried before an error is thrown.
      */
     static public $yyFallback = array(
-%%
     );
     /**
      * Turn parser tracing on by giving a stream to which to write the trace
@@ -261,7 +299,8 @@ class ParseyyStackEntry
      * @var array
      */
     static public $yyTokenName = array( 
-%%
+  '$',             'NAME',          'PAR_OPEN',      'PAR_CLOSE',   
+  'RESOURCE',      'error',         'proto',         'returns',     
     );
 
     /**
@@ -269,7 +308,8 @@ class ParseyyStackEntry
      * @var array
      */
     static public $yyRuleName = array(
-%%
+ /*   0 */ "proto ::= returns NAME PAR_OPEN PAR_CLOSE",
+ /*   1 */ "returns ::= RESOURCE NAME",
     );
 
     /**
@@ -309,7 +349,6 @@ class ParseyyStackEntry
         ** which appear on the RHS of the rule, but which are not used
         ** inside the C code.
         */
-%%
             default:  break;   /* If no destructor action specified: do nothing */
         }
     }
@@ -321,7 +360,7 @@ class ParseyyStackEntry
      * is popped from the stack, then call it.
      *
      * Return the major token number for the symbol popped.
-     * @param ParseyyParser
+     * @param ProtoParser_yyParser
      * @return int
      */
     function yy_pop_parser_stack()
@@ -400,7 +439,7 @@ class ParseyyStackEntry
                     if ($nextstate < self::YYNSTATE) {
                         // we need to shift a non-terminal
                         $this->yyidx++;
-                        $x = new ParseyyStackEntry;
+                        $x = new ProtoParser_yyStackEntry;
                         $x->stateno = $nextstate;
                         $x->major = self::$yyRuleInfo[$yyruleno]['lhs'];
                         $this->yystack[$this->yyidx] = $x;
@@ -474,7 +513,7 @@ class ParseyyStackEntry
                     if ($nextstate < self::YYNSTATE) {
                         // we need to shift a non-terminal
                         $this->yyidx++;
-                        $x = new ParseyyStackEntry;
+                        $x = new ProtoParser_yyStackEntry;
                         $x->stateno = $nextstate;
                         $x->major = self::$yyRuleInfo[$yyruleno]['lhs'];
                         $this->yystack[$this->yyidx] = $x;
@@ -602,10 +641,9 @@ class ParseyyStackEntry
             }
             /* Here code is inserted which will execute if the parser
             ** stack ever overflows */
-%%
             return;
         }
-        $yytos = new ParseyyStackEntry;
+        $yytos = new ProtoParser_yyStackEntry;
         $yytos->stateno = $yyNewState;
         $yytos->major = $yyMajor;
         $yytos->minor = $yypMinor;
@@ -636,7 +674,8 @@ class ParseyyStackEntry
      * </pre>
      */
     static public $yyRuleInfo = array(
-%%
+  array( 'lhs' => 6, 'rhs' => 4 ),
+  array( 'lhs' => 7, 'rhs' => 2 ),
     );
 
     /**
@@ -646,7 +685,6 @@ class ParseyyStackEntry
      * If a rule is not set, it has no handler.
      */
     static public $yyReduceMap = array(
-%%
     );
     /* Beginning here are the reduction cases.  A typical example
     ** follows:
@@ -654,7 +692,6 @@ class ParseyyStackEntry
     **   function yy_r0($yymsp){ ... }           // User supplied code
     **  #line <lineno> <thisfile>
     */
-%%
 
     /**
      * placeholder for the left hand side in a reduce operation.
@@ -695,7 +732,7 @@ class ParseyyStackEntry
         //int $yygoto;                     /* The next state */
         //int $yyact;                      /* The next action */
         //mixed $yygotominor;        /* The LHS of the rule reduced */
-        //ParseyyStackEntry $yymsp;            /* The top of the parser's stack */
+        //ProtoParser_yyStackEntry $yymsp;            /* The top of the parser's stack */
         //int $yysize;                     /* Amount to pop the stack */
         $yymsp = $this->yystack[$this->yyidx];
         if (self::$yyTraceFILE && $yyruleno >= 0 
@@ -727,7 +764,7 @@ class ParseyyStackEntry
             ** That gives a significant speed improvement. */
             if (!self::$yyTraceFILE && $yysize) {
                 $this->yyidx++;
-                $x = new ParseyyStackEntry;
+                $x = new ProtoParser_yyStackEntry;
                 $x->stateno = $yyact;
                 $x->major = $yygoto;
                 $x->minor = $yy_lefthand_side;
@@ -755,7 +792,6 @@ class ParseyyStackEntry
         }
         /* Here code is inserted which will be executed whenever the
         ** parser fails */
-%%
     }
 
     /**
@@ -767,7 +803,8 @@ class ParseyyStackEntry
      */
     function yy_syntax_error($yymajor, $TOKEN)
     {
-%%
+#line 3 "bug9346.y"
+ echo "SYNTAX ERROR"; #line 812 "bug9346.php"
     }
 
     /**
@@ -785,7 +822,6 @@ class ParseyyStackEntry
         }
         /* Here code is inserted which will be executed whenever the
         ** parser accepts */
-%%
     }
 
     /**
@@ -809,7 +845,7 @@ class ParseyyStackEntry
             /* if ($yymajor == 0) return; // not sure why this was here... */
             $this->yyidx = 0;
             $this->yyerrcnt = -1;
-            $x = new ParseyyStackEntry;
+            $x = new ProtoParser_yyStackEntry;
             $x->stateno = 0;
             $x->major = 0;
             $this->yystack = array();
@@ -920,4 +956,24 @@ class ParseyyStackEntry
             }            
         } while ($yymajor != self::YYNOCODE && $this->yyidx >= 0);
     }
+}#line 8 "bug9346.y"
+
+$tokens = array(
+array("token"=>ProtoParser::RESOURCE,
+"value"=>"resource"),
+array("token"=>ProtoParser::NAME,    
+"value"=>"some_res"),
+array("token"=>ProtoParser::NAME,    
+"value"=>"some_function"),
+array("token"=>ProtoParser::PAR_OPEN,
+"value"=>"("),
+array("token"=>ProtoParser::PAR_CLOSE,
+"value"=>")"),
+);
+
+$parser = new ProtoParser();
+foreach ($tokens as $token) {
+    $parser->doParse($token["token"],
+$token["value"]);
 }
+$parser->doParse(0, 0);#line 986 "bug9346.php"

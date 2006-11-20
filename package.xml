@@ -30,9 +30,9 @@
   <email>cellog@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-10-12</date>
+ <date>2006-11-20</date>
  <version>
-  <release>0.1.2</release>
+  <release>0.1.3</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -40,7 +40,10 @@
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>fix replacements in phplemon script in unix (Hartmut Holzgraefe) (no code changes)</notes>
+ <notes>
+  fix Bug #9346: lots of PHP warnings instead of syntax error
+  fix phplemon.bat replacements
+ </notes>
  <contents>
   <dir baseinstalldir="PHP" name="/">
    <dir name="ParserGenerator">
@@ -73,6 +76,10 @@
     </file>
     <file name="cli.php" role="php"/>
    </dir> <!-- /ParserGenerator -->
+   <dir name="tests">
+    <file name="bug9346.y" role="test"/>
+    <file name="bug9346.php" role="test"/>
+   </dir> <!-- /tests -->
    <file name="LICENSE.txt" role="doc"/>
    <file name="Lempar.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
@@ -81,8 +88,8 @@
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file name="phplemon.bat" role="script" baseinstalldir="">
-    <tasks:replace from="@php_bin@" to="php_bin" type="pear-config"/>
-    <tasks:replace from="@php_dir@" to="php_dir" type="pear-config"/>
+    <tasks:replace from="@php-bin@" to="php_bin" type="pear-config"/>
+    <tasks:replace from="@php-dir@" to="php_dir" type="pear-config"/>
     <tasks:windowseol/>
    </file>
    <file name="phplemon" role="script" baseinstalldir="">
@@ -142,6 +149,22 @@
    <date>2006-10-12</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>fix replacements in phplemon script in unix (Hartmut Holzgraefe) (no code changes)</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.1.3</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2006-10-12</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>
+    fix Bug #9346: lots of PHP warnings instead of syntax error
+    fix phplemon.bat replacements
+   </notes>
   </release>
  </changelog>
 </package>
