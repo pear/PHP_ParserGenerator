@@ -163,7 +163,7 @@ class PHP_ParserGenerator
         }
         $v = self::$options[$argv[$i][1]] == '-';
         if (self::$options[$argv[$i][1]]['type'] == self::OPT_FLAG) {
-            $this->{self::$options[$argv[$i][1]]['arg']} = (int) $v;
+            $this->{self::$options[$argv[$i][1]]['arg']} = 1;
         } elseif (self::$options[$argv[$i][1]]['type'] == self::OPT_FFLAG) {
             $this->{self::$options[$argv[$i][1]]['arg']}($v);
         } elseif (self::$options[$argv[$i][1]]['type'] == self::OPT_FSTR) {
@@ -221,22 +221,22 @@ class PHP_ParserGenerator
             case self::OPT_FFLAG:
                 break;
             case self::OPT_DBL:
-                $this->${self::$options[$argv[$i]]['arg']} = $dv;
+                $this->{self::$options[$argv[$i]]['arg']} = $dv;
                 break;
             case self::OPT_FDBL:
-                $this->${self::$options[$argv[$i]]['arg']}($dv);
+                $this->{self::$options[$argv[$i]]['arg']}($dv);
                 break;
             case self::OPT_INT:
-                $this->${self::$options[$argv[$i]]['arg']} = $lv;
+                $this->{self::$options[$argv[$i]]['arg']} = $lv;
                 break;
             case self::OPT_FINT:
-                $this->${self::$options[$argv[$i]]['arg']}($lv);
+                $this->{self::$options[$argv[$i]]['arg']}($lv);
                 break;
             case self::OPT_STR:
-                $this->${self::$options[$argv[$i]]['arg']} = $sv;
+                $this->{self::$options[$argv[$i]]['arg']} = $sv;
                 break;
             case self::OPT_FSTR:
-                $this->${self::$options[$argv[$i]]['arg']}($sv);
+                $this->{self::$options[$argv[$i]]['arg']}($sv);
                 break;
         }
         return 0;
@@ -257,13 +257,13 @@ class PHP_ParserGenerator
                     if ($argv[$i][0] == '+' || $argv[$i][0] == '-') {
                         $errcnt += $this->handleflags($i, $argv);
                     } elseif (strstr($argv[$i],'=')) {
-                        $errcnt += $this->handleswitch(i, $argv);
+                        $errcnt += $this->handleswitch($i, $argv);
                     }
                 }
             }
         } catch (Exception $e) {
             OptPrint();
-            echo $e;
+            echo $e->getMessage();
             exit(1);
         }
         return 0;
@@ -364,22 +364,24 @@ class PHP_ParserGenerator
             switch ($info['type']) {
                 case self::OPT_FLAG:
                 case self::OPT_FFLAG:
-                    printf("  -%-*s  %s\n", $max, $label, $info['message']);
+                    echo "  -$label";
+                    echo str_repeat(' ', $max - strlen($label));
+                    echo "  $info[message]\n";
                     break;
                 case self::OPT_INT:
                 case self::OPT_FINT:
-                    printf("  %s=<integer>%*s  %s\n", $label, $max - strlen($label) - 9,
-                        $info['message']);
+                    echo "  $label=<integer>" . str_repeat(' ', $max - strlen($label) - 9);
+                    echo "  $info[message]\n";
                     break;
                 case self::OPT_DBL:
                 case self::OPT_FDBL:
-                    printf("  %s=<real>%*s  %s\n", $label, $max - strlen($label) - 6,
-                        $info['message']);
+                    echo "  $label=<real>" . str_repeat(' ', $max - strlen($label) - 6);
+                    echo "  $info[message]\n";
                     break;
                 case self::OPT_STR:
                 case self::OPT_FSTR:
-                    printf("  %s=<string>%*s  %s\n", $label, $max - strlen($label) - 8,
-                        $info['message']);
+                    echo "  $label=<string>" . str_repeat(' ', $max - strlen($label) - 8);
+                    echo "  $info[message]\n";
                     break;
             }
         }
