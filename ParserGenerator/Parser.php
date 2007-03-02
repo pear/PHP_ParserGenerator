@@ -536,6 +536,23 @@ class PHP_ParserGenerator_Parser
                         $rp->rhs[$i] = $this->rhs[$i];
                         $rp->rhsalias[$i] = $this->alias[$i];
                     }
+                    if (count(array_unique($rp->rhsalias)) != count($rp->rhsalias)) {
+                        $used = array();
+                        foreach ($rp->rhsalias as $i => $symbol) {
+                            if (!is_string($symbol)) {
+                                continue;
+                            }
+                            if (isset($used[$symbol])) {
+                                PHP_ParserGenerator::ErrorMsg($this->filename, 
+                                    $this->tokenlineno,
+                                    "RHS symbol \"%s\" used multiple times.",
+                                    $symbol);
+                                $this->errorcnt++;
+                            } else {
+                                $used[$symbol] = $i;
+                            }
+                        }
+                    }
                     $rp->lhs = $this->lhs;
                     $rp->lhsalias = $this->lhsalias;
                     $rp->nrhs = $this->nrhs;
