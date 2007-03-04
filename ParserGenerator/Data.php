@@ -668,6 +668,11 @@ class PHP_ParserGenerator_Data
             if (!$stp->ap) {
                 throw new Exception('state has no actions associated');
             }
+            echo 'processing state ' . $stp->statenum . " actions:\n";
+            for ($ap = $stp->ap; $ap !== 0 && $ap->next !== 0; $ap = $ap->next) {
+                echo '  Action ';
+                $ap->display(true);
+            }
             $stp->ap = PHP_ParserGenerator_Action::Action_sort($stp->ap);
             for ($ap = $stp->ap; $ap !== 0 && $ap->next !== 0; $ap = $ap->next) {
                 for ($nap = $ap->next; $nap !== 0 && $nap->sp === $ap->sp ; $nap = $nap->next) {

@@ -42,6 +42,7 @@
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
  <notes>
   - fix Bug #10245: if multiple RHS identifiers are the same, no error
+  - fix Bug #10260: exception instead of helpful error message
  </notes>
  <contents>
   <dir baseinstalldir="PHP" name="/">

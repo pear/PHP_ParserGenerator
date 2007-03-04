@@ -122,21 +122,52 @@ class PHP_ParserGenerator_Action {
             $rc = $ap1->type - $ap2->type;
         }
         if ($rc === 0) {
+            if ($ap1->type == self::SHIFT) {
+                if ($ap1->x->statenum != $ap2->x->statenum) {
+                    throw new Exception('Shift conflict: ' . $ap1->sp->name .
+                        ' shifts both to state ' . $ap1->x->statenum . ' (rule ' .
+                        $ap1->x->cfp->rp->lhs->name . ' on line ' .
+                        $ap1->x->cfp->rp->ruleline . ') and to state ' .
+                        $ap2->x->statenum . ' (rule ' .
+                        $ap2->x->cfp->rp->lhs->name . ' on line ' .
+                        $ap2->x->cfp->rp->ruleline . ')');
+                }
+            }
             if ($ap1->type != self::REDUCE &&
             $ap1->type != self::RD_RESOLVED &&
             $ap1->type != self::CONFLICT) {
                 throw new Exception('action has not been processed: ' .
-                $ap1->sp->name);
+                $ap1->sp->name . ' on line ' . $ap1->x->cfp->rp->ruleline .
+                ', rule ' . $ap1->x->cfp->rp->lhs->name);
             }
             if ($ap2->type != self::REDUCE &&
             $ap2->type != self::RD_RESOLVED &&
             $ap2->type != self::CONFLICT) {
                 throw new Exception('action has not been processed: ' .
-                $ap2->sp->name);
+                $ap2->sp->name . ' on line ' . $ap2->x->cfp->rp->ruleline .
+                ', rule ' . $ap2->x->cfp->rp->lhs->name);
             }
             $rc = $ap1->x->index - $ap2->x->index;
         }
         return $rc;
+    }
+
+    function display($processed = false)
+    {
+        $map = array(
+            self::ACCEPT => 'ACCEPT',
+            self::CONFLICT => 'CONFLICT',
+            self::REDUCE => 'REDUCE',
+            self::SHIFT => 'SHIFT'
+        );
+        echo $map[$this->type] . ' for ' . $this->sp->name;
+        if ($this->type == self::REDUCE) {
+            echo ' - rule ' . $this->x->lhs->name . "\n";
+        } elseif ($this->type == self::SHIFT) {
+            echo ' - state ' . $this->x->statenum . ', basis ' . $this->x->cfp->rp->lhs->name . "\n";
+        } else {
+            echo "\n";
+        }
     }
 
     /**
@@ -145,7 +176,7 @@ class PHP_ParserGenerator_Action {
      * @param PHP_ParserGenerator_Action|null
      * @param int one of the class constants from PHP_ParserGenerator_Action
      * @param PHP_ParserGenerator_Symbol
-     * @param PHP_ParserGenerator_Symbol|PHP_ParserGenerator_Rule
+     * @param PHP_ParserGenerator_State|PHP_ParserGenerator_Rule
      */
     static function Action_add(&$app, $type, PHP_ParserGenerator_Symbol $sp, $arg)
     {
@@ -155,6 +186,8 @@ class PHP_ParserGenerator_Action {
         $new->type = $type;
         $new->sp = $sp;
         $new->x = $arg;
+        echo ' Adding ';
+        $new->display();
     }
 
     /**
@@ -174,6 +207,9 @@ class PHP_ParserGenerator_Action {
      */
     function PrintAction($fp, $indent)
     {
+        if (!$fp) {
+            $fp = STDOUT;
+        }
         $result = 1;
         switch ($this->type)
         {
