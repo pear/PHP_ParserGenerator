@@ -1708,10 +1708,6 @@ class PHP_ParserGenerator_Data
     {
         $lhsused = 0;    /* True if the LHS element has been used */
         $used = array();   /* True for each RHS element which is used */
-    
-        for($i = 0; $i < $rp->nrhs; $i++) {
-            $used[$i] = 0;
-        }
         
         $this->append_str('', 0);
         for ($i = 0; $i < strlen($rp->code); $i++) {

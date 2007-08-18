@@ -41,6 +41,7 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
  <notes>
+  - fix Bug #11645: unused rhs labels undetected [r0vert]
   - fix Bug #11647: substitution of @X works incorrectly [r0vert]
  </notes>
  <contents>
