@@ -30,9 +30,9 @@
   <email>cellog@php.net</email>
   <active>yes</active>
  </lead>
- <date>2007-03-05</date>
+ <date>2007-08-19</date>
  <version>
-  <release>0.1.5</release>
+  <release>0.1.6</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -41,8 +41,7 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
  <notes>
-  - fix Bug #10245: if multiple RHS identifiers are the same, no error
-  - fix Bug #10260: exception instead of helpful error message
+  - fix Bug #11647: substitution of @X works incorrectly [r0vert]
  </notes>
  <contents>
   <dir baseinstalldir="PHP" name="/">
@@ -194,6 +193,7 @@
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>
     - fix Bug #10245: if multiple RHS identifiers are the same, no error
+    - fix Bug #10260: exception instead of helpful error message
    </notes>
   </release>
  </changelog>

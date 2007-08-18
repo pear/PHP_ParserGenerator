@@ -1733,7 +1733,7 @@ class PHP_ParserGenerator_Data
                 } else {
                     for ($ii = 0; $ii < $rp->nrhs; $ii++) {
                         if ($rp->rhsalias[$ii] && $tempcp == $rp->rhsalias[$ii]) {
-                            if ($ii !== 0 && $rp->code[$ii - 1] == '@') {
+                            if ($rp->code[0] == '@') {
                                 /* If the argument is of the form @X then substitute
                                 ** the token number of X, not the value of X */
                                 $this->append_str("\$this->yystack[\$this->yyidx + " .
