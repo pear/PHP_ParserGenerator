@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.4.9" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.9.0RC1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>PHP_ParserGenerator</name>
  <channel>pear.php.net</channel>
  <summary>translate grammar files in Lemon Parser Generator format into a PHP 5 parser</summary>
- <description>
-  Translate a grammar file in the lemon parser generator format
+ <description>Translate a grammar file in the lemon parser generator format
   into a PHP 5-based parser
   
   There are a few PHP-specific changes to the lemon parser generator.
@@ -22,15 +21,15 @@
   problematic edge cases where an unexpected token could cause the parser
   to simply accept input.
   
-  Otherwise, the file format is identical to the Lemon parser generator
- </description>
+  Otherwise, the file format is identical to the Lemon parser generator</description>
  <lead>
   <name>Greg Beaver</name>
   <user>cellog</user>
   <email>cellog@php.net</email>
-  <active>yes</active>
+  <active>no</active>
  </lead>
- <date>2007-08-19</date>
+ <date>2010-03-05</date>
+ <time>06:09:13</time>
  <version>
   <release>0.1.6</release>
   <api>0.1.0</api>
@@ -41,63 +40,79 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
  <notes>
-  - fix Bug #11645: unused rhs labels undetected [r0vert]
-  - fix Bug #11647: substitution of @X works incorrectly [r0vert]
+- fix Bug #11645: unused rhs labels undetected [r0vert]
+- fix Bug #11647: substitution of @X works incorrectly [r0vert]
+- Bug #10685 	fatal error when calling &quot;phplemon --help&quot;
  </notes>
  <contents>
   <dir baseinstalldir="PHP" name="/">
-   <dir name="ParserGenerator">
-    <file name="Action.php" role="php">
-     <tasks:replace from="@package_version@" to="version" type="package-info" />
-    </file>
-    <file name="ActionTable.php" role="php">
-     <tasks:replace from="@package_version@" to="version" type="package-info" />
-    </file>
-    <file name="Config.php" role="php">
-     <tasks:replace from="@package_version@" to="version" type="package-info" />
-    </file>
-    <file name="Data.php" role="php">
-     <tasks:replace from="@package_version@" to="version" type="package-info" />
-    </file>
-    <file name="Parser.php" role="php">
-     <tasks:replace from="@package_version@" to="version" type="package-info" />
-    </file>
-    <file name="PropagationLink.php" role="php">
-     <tasks:replace from="@package_version@" to="version" type="package-info" />
-    </file>
-    <file name="Rule.php" role="php">
-     <tasks:replace from="@package_version@" to="version" type="package-info" />
-    </file>
-    <file name="State.php" role="php">
-     <tasks:replace from="@package_version@" to="version" type="package-info" />
-    </file>
-    <file name="Symbol.php" role="php">
-     <tasks:replace from="@package_version@" to="version" type="package-info" />
-    </file>
-    <file name="cli.php" role="php"/>
-   </dir> <!-- /ParserGenerator -->
-   <dir name="tests">
-    <file name="bug9346.y" role="test"/>
-    <file name="bug9346.php" role="test"/>
-   </dir> <!-- /tests -->
-   <file name="LICENSE.txt" role="doc"/>
-   <file name="Lempar.php" role="php">
+   <file baseinstalldir="PHP" md5sum="c145706ed8666c45f915f1593e9b5a09" name="examples/Parser.php" role="doc" />
+   <file baseinstalldir="PHP" md5sum="9863909698add5cbe3b97498449783a2" name="examples/Parser.y" role="doc" />
+   <file baseinstalldir="PHP" md5sum="9d00754b4311bf5975f350fa5deefe29" name="examples/test.php" role="doc" />
+   <file baseinstalldir="PHP" md5sum="3f1b4c524412d6b98ed94ea9ec37ec8c" name="ParserGenerator/Action.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file name="ParserGenerator.php" role="php">
+   <file baseinstalldir="PHP" md5sum="2b66c757aa3fb0476c29106e21f03dfa" name="ParserGenerator/ActionTable.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file name="phplemon.bat" role="script" baseinstalldir="">
-    <tasks:replace from="@php-bin@" to="php_bin" type="pear-config"/>
-    <tasks:replace from="@php-dir@" to="php_dir" type="pear-config"/>
-    <tasks:windowseol/>
+   <file baseinstalldir="PHP" md5sum="c2d73ae769b44142a350360b01b03803" name="ParserGenerator/cli.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="99fe0b4616b18614c768bf9651bea6c7" name="ParserGenerator/Config.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file name="phplemon" role="script" baseinstalldir="">
-    <tasks:replace from="@php_bin@" to="php_bin" type="pear-config"/>
-    <tasks:replace from="@php_dir@" to="php_dir" type="pear-config"/>
-    <tasks:unixeol/>
+   <file baseinstalldir="PHP" md5sum="b4a63237b8d4137f32f92594220c9319" name="ParserGenerator/Data.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-  </dir> <!-- / -->
+   <file baseinstalldir="PHP" md5sum="e762dea90fe51a492cee1c8d970dbcaa" name="ParserGenerator/Parser.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file baseinstalldir="PHP" md5sum="60991c0d06678b197479f33d82e0591f" name="ParserGenerator/PropagationLink.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file baseinstalldir="PHP" md5sum="734e61a21f95fa6c4ba74277c6e0bc0e" name="ParserGenerator/Rule.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file baseinstalldir="PHP" md5sum="c8458b6f364edf791b931f3dac0988dc" name="ParserGenerator/State.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file baseinstalldir="PHP" md5sum="79223b583fef824a51d30c42e767fb7b" name="ParserGenerator/Symbol.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file baseinstalldir="PHP" md5sum="60515b91f81bad0e963517ce0795a0f6" name="tests/bug9346.php" role="test" />
+   <file baseinstalldir="PHP" md5sum="5b500fca7d60007ad3ca05911b90ca49" name="tests/bug9346.y" role="test" />
+   <file baseinstalldir="PHP" md5sum="4689ea4dce57beb3ba3a79411d7be5f7" name="tutorials/PHP_ParserGenerator/PHP_ParserGenerator.pkg" role="data" />
+   <file baseinstalldir="PHP" md5sum="f6d960589a6fd5435d50a67157d2f937" name="docs.ini" role="data" />
+   <file baseinstalldir="PHP" md5sum="76bb4b096d7b677ee4fcd99e34dfd60a" name="Lemon.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="18a8d63be1e2ad0ed97c36a221583ffe" name="Lempar.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file baseinstalldir="PHP" md5sum="902a2a4e5a9a0b7bc2340005e0780812" name="LICENSE.txt" role="doc" />
+   <file baseinstalldir="PHP" md5sum="785f9854bd8cf49dd666945b83106b98" name="Main.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="704b20a1bb60ec8f85bd7f97ed1b7a20" name="oops.out" role="data" />
+   <file baseinstalldir="PHP" md5sum="51c7e3e9e61fa7d39378395bb9a0f9d0" name="oops.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="7103457ac33952f7e8d9cfc4fd11395e" name="oops.y" role="data" />
+   <file baseinstalldir="PHP" md5sum="156c00ec2bb20e086330bc0884363d56" name="parsephp.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="4ff749a413933f7c3e78cc3a9f72d89e" name="ParserGenerator.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file baseinstalldir="PHP" md5sum="d443ebbde134ac3727ccabb64e5a431a" name="PHP.out" role="data" />
+   <file baseinstalldir="PHP" md5sum="141df71964ddb13ee506b36796f5dc65" name="PHP.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="65a2b5a995719e9ce79e9512d6bd489d" name="PHP.y" role="data" />
+   <file baseinstalldir="" md5sum="b14453392354ff594ecea21e357fd169" name="phplemon" role="script">
+    <tasks:replace from="@php_bin@" to="php_bin" type="pear-config" />
+    <tasks:replace from="@php_dir@" to="php_dir" type="pear-config" />
+    <tasks:unixeol />
+   </file>
+   <file baseinstalldir="" md5sum="f275bad665127fe5f785d82f8b37190f" name="phplemon.bat" role="script">
+    <tasks:replace from="@php-bin@" to="php_bin" type="pear-config" />
+    <tasks:replace from="@php-dir@" to="php_dir" type="pear-config" />
+    <tasks:windowseol />
+   </file>
+   <file baseinstalldir="PHP" md5sum="03ec168af909fe0e9ffbbe121386b0c9" name="PHP_Parser.out" role="data" />
+   <file baseinstalldir="PHP" md5sum="cc03a9efe4f271fa7418ba02a55cf57c" name="PHP_Parser.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="6b44338703d3725ae09260513122d57c" name="PHP_Parser.y" role="data" />
+   <file baseinstalldir="PHP" md5sum="beca76c5cf08519469502eac27b14850" name="raw_php.y" role="data" />
+   <file baseinstalldir="PHP" md5sum="a4f21a14038ac9d754344a6f811e39fb" name="Tokenizer.php" role="php" />
+  </dir>
  </contents>
  <dependencies>
   <required>
@@ -109,7 +124,12 @@
    </pearinstaller>
   </required>
  </dependencies>
- <phprelease/>
+ <phprelease>
+  <filelist>
+   <install as="phplemon" name="phplemon" />
+   <install as="phplemon.bat" name="phplemon.bat" />
+  </filelist>
+ </phprelease>
  <changelog>
   <release>
    <version>
@@ -122,7 +142,9 @@
    </stability>
    <date>2006-06-24</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License 3.01</license>
-   <notes>initial release</notes>
+   <notes>
+initial release
+   </notes>
   </release>
   <release>
    <version>
@@ -135,7 +157,9 @@
    </stability>
    <date>2006-07-18</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
-   <notes>update to New BSD license (no code changes)</notes>
+   <notes>
+update to New BSD license (no code changes)
+   </notes>
   </release>
   <release>
    <version>
@@ -148,7 +172,9 @@
    </stability>
    <date>2006-10-12</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
-   <notes>fix replacements in phplemon script in unix (Hartmut Holzgraefe) (no code changes)</notes>
+   <notes>
+fix replacements in phplemon script in unix (Hartmut Holzgraefe) (no code changes)
+   </notes>
   </release>
   <release>
    <version>
@@ -162,8 +188,8 @@
    <date>2006-10-12</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>
-    fix Bug #9346: lots of PHP warnings instead of syntax error
-    fix phplemon.bat replacements
+fix Bug #9346: lots of PHP warnings instead of syntax error
+fix phplemon.bat replacements
    </notes>
   </release>
   <release>
@@ -178,7 +204,7 @@
    <date>2006-12-15</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>
-    - fix Bug #9345: help output broken
+- fix Bug #9345: help output broken
    </notes>
   </release>
   <release>
@@ -193,8 +219,25 @@
    <date>2007-03-05</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>
-    - fix Bug #10245: if multiple RHS identifiers are the same, no error
-    - fix Bug #10260: exception instead of helpful error message
+- fix Bug #10245: if multiple RHS identifiers are the same, no error
+- fix Bug #10260: exception instead of helpful error message
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.1.6</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2010-03-05</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>
+- fix Bug #11645: unused rhs labels undetected [r0vert]
+- fix Bug #11647: substitution of @X works incorrectly [r0vert]
+- Bug #10685 	fatal error when calling &quot;phplemon --help&quot;
    </notes>
   </release>
  </changelog>
