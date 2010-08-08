@@ -469,7 +469,7 @@ class PHP_ParserGenerator
             $lem->symbols[$i]->index = $i;
         }
         // find the first lower-case symbol
-        for($i = 1; ord($lem->symbols[$i]->name[0]) < ord ('Z'); $i++);
+        for($i = 1; ord($lem->symbols[$i]->name[0]) <= ord ('Z'); $i++);
         $lem->nterminal = $i;
 
         /* Generate a reprint of the grammar, if requested on the command line */
