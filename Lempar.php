@@ -347,7 +347,7 @@ class ParseyyStackEntry
      */
     function __destruct()
     {
-        while ($this->yyidx >= 0) {
+        while ($this->yystack !== Array()) {
             $this->yy_pop_parser_stack();
         }
         if (is_resource(self::$yyTraceFILE)) {
