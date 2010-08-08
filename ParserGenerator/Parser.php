@@ -326,6 +326,10 @@ class PHP_ParserGenerator_Parser
                 $lineno += count(explode("\n", substr($filebuf, $oldcp, $cp - $oldcp))) - 1;
             } elseif ($filebuf[$cp] == '{') {               /* A block of C code */
                 $cp++;
+                if ($filebuf[$cp]=="}") { 
+                    $filebuf = substr($filebuf, 0, $cp)." ".substr($filebuf, $cp); 
+                }
+
                 for ($level = 1; $cp < strlen($filebuf) && ($level > 1 || $filebuf[$cp] != '}'); $cp++) {
                     if ($filebuf[$cp] == "\n") {
                         $lineno++;
