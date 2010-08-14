@@ -263,7 +263,7 @@ class PHP_ParserGenerator
             }
         } catch (Exception $e) {
             $this->OptPrint();
-            echo $e->getMessage();
+            echo $e->getMessage()."\n";
             exit(1);
         }
         return 0;
