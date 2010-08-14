@@ -245,7 +245,7 @@ class ParseyyStackEntry
     /**
      * @var int
      */
-    public $yyidx;                    /* Index of top element in stack */
+    public $yyidx = -1;                    /* Index of top element in stack */
     /**
      * @var int
      */
@@ -347,7 +347,7 @@ class ParseyyStackEntry
      */
     function __destruct()
     {
-        while ($this->yystack !== Array()) {
+        while ($this->yyidx >= 0) {
             $this->yy_pop_parser_stack();
         }
         if (is_resource(self::$yyTraceFILE)) {
