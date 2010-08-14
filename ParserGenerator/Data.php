@@ -309,6 +309,12 @@ class PHP_ParserGenerator_Data
      */
     public $argv0;
 
+    /**
+     * Alternate parser template file
+     * @var string
+     */
+    public $parser_template = "";
+
     /* Find a precedence symbol of every rule in the grammar.
      * 
      * Those rules which have a precedence symbol coded in the input
@@ -966,7 +972,8 @@ class PHP_ParserGenerator_Data
      */
     private function tplt_open()
     {
-        $templatename = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "Lempar.php";
+        $templatename = $this->parser_template ? $this->parser_template : dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "Lempar.php";
+
         $buf = $this->filenosuffix . '.lt';
         if (file_exists($buf) && is_readable($buf)) {
             $tpltname = $buf;

@@ -139,6 +139,11 @@ class PHP_ParserGenerator
             'type' => self::OPT_FLAG,
             'arg' => 'version',
             'message' => 'Print the version number.'
+        ),
+        'T' => array(
+            'type'    => self::OPT_STR,
+            'arg'     => 'parser_template',
+            'message' => 'Use different parser template file.'
         )
     );
 
@@ -150,6 +155,8 @@ class PHP_ParserGenerator
     private $statistics = 0;
     private $version = 0;
     private $size;
+    private $parser_template = "";
+
     /**
      * Process a flag command line argument.
      * @param int
@@ -421,6 +428,7 @@ class PHP_ParserGenerator
             exit(1);
         }
         $lem->errorcnt = 0;
+        $lem->parser_template = $this->parser_template;
 
         /* Initialize the machine */
         $lem->argv0 = $_SERVER['argv'][0];
