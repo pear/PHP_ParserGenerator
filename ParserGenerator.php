@@ -54,13 +54,14 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   php
- * @package    PHP_ParserGenerator
- * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2006 Gregory Beaver
- * @license    http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id$
- * @since      File available since Release 0.1.0
+ * @category  PHP
+ * @package   PHP_ParserGenerator
+ * @author    Gregory Beaver <cellog@php.net>
+ * @copyright 2006 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/PHP_ParserGenerator
+ * @since     File available since Release 0.1.0
  */
 /**#@+
  * Basic components of the parser generator
@@ -78,15 +79,17 @@ require_once 'PHP/ParserGenerator/State.php';
 /**
  * The basic home class for the parser generator
  * 
- * @package    PHP_ParserGenerator
- * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2006 Gregory Beaver
- * @license    http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @version    @package_version@
- * @since      Class available since Release 0.1.0
- * @example    Lempar.php
- * @example    examples/Parser.y Sample parser file format (PHP_LexerGenerator's parser)
- * @example    examples/Parser.php Sample parser file format PHP code (PHP_LexerGenerator's parser)
+ * @category  PHP
+ * @package   PHP_ParserGenerator
+ * @author    Gregory Beaver <cellog@php.net>
+ * @copyright 2006 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @version   Release: @package_version@
+ * @link      http://pear.php.net/package/PHP_ParserGenerator
+ * @since     Class available since Release 0.1.0
+ * @example   Lempar.php
+ * @example   examples/Parser.y Sample parser file format (PHP_LexerGenerator's parser)
+ * @example   examples/Parser.php Sample parser file format PHP code (PHP_LexerGenerator's parser)
  */
 class PHP_ParserGenerator
 {
@@ -99,7 +102,7 @@ class PHP_ParserGenerator
     const OPT_FLAG = 1, OPT_INT = 2, OPT_DBL = 3, OPT_STR = 4,
           OPT_FFLAG = 5, OPT_FINT = 6, OPT_FDBL = 7, OPT_FSTR = 8;
     public $azDefine = array();
-    private static $options = array(
+    private static $_options = array(
         'b' => array(
             'type' => self::OPT_FLAG,
             'arg' => 'basisflag',
@@ -112,7 +115,7 @@ class PHP_ParserGenerator
         ),
         'D' => array(
             'type' => self::OPT_FSTR,
-            'arg' => 'handle_D_option',
+            'arg' => 'handleDOption',
             'message' => 'Define an %ifdef macro.'
         ),
         'g' => array(
@@ -147,34 +150,36 @@ class PHP_ParserGenerator
         )
     );
 
-    private $basisflag = 0;
-    private $compress = 0;
-    private $rpflag = 0;
-    private $mhflag = 0;
-    private $quiet = 0;
-    private $statistics = 0;
-    private $version = 0;
-    private $size;
-    private $parser_template = "";
+    private $_basisflag = 0;
+    private $_compress = 0;
+    private $_rpflag = 0;
+    private $_mhflag = 0;
+    private $_quiet = 0;
+    private $_statistics = 0;
+    private $_version = 0;
+    private $_size;
+    private $_parser_template = "";
 
     /**
      * Process a flag command line argument.
-     * @param int
-     * @param array
+     *
+     * @param int   $i
+     * @param array $argv
+     *
      * @return int
      */
     function handleflags($i, $argv)
     {
-        if (!isset($argv[1]) || !isset(self::$options[$argv[$i][1]])) {
+        if (!isset($argv[1]) || !isset(self::$_options[$argv[$i][1]])) {
             throw new Exception('Command line syntax error: undefined option "' .  $argv[$i] . '"');
         }
-        $v = self::$options[$argv[$i][1]] == '-';
-        if (self::$options[$argv[$i][1]]['type'] == self::OPT_FLAG) {
-            $this->{self::$options[$argv[$i][1]]['arg']} = 1;
-        } elseif (self::$options[$argv[$i][1]]['type'] == self::OPT_FFLAG) {
-            $this->{self::$options[$argv[$i][1]]['arg']}($v);
-        } elseif (self::$options[$argv[$i][1]]['type'] == self::OPT_FSTR) {
-            $this->{self::$options[$argv[$i][1]]['arg']}(substr($v, 2));
+        $v = self::$_options[$argv[$i][1]] == '-';
+        if (self::$_options[$argv[$i][1]]['type'] == self::OPT_FLAG) {
+            $this->{self::$_options[$argv[$i][1]]['arg']} = 1;
+        } elseif (self::$_options[$argv[$i][1]]['type'] == self::OPT_FFLAG) {
+            $this->{self::$_options[$argv[$i][1]]['arg']}($v);
+        } elseif (self::$_options[$argv[$i][1]]['type'] == self::OPT_FSTR) {
+            $this->{self::$_options[$argv[$i][1]]['arg']}(substr($v, 2));
         } else {
             throw new Exception('Command line syntax error: missing argument on switch: "' . $argv[$i] . '"');
         }
@@ -183,9 +188,10 @@ class PHP_ParserGenerator
 
     /**
      * Process a command line switch which has an argument.
-     * @param int
-     * @param array
-     * @param array
+     *
+     * @param int   $i
+     * @param array $argv
+     *
      * @return int
      */
     function handleswitch($i, $argv)
@@ -195,63 +201,65 @@ class PHP_ParserGenerator
         $sv = $end = $cp = '';
         $j; // int
         $errcnt = 0;
-        $cp = strstr($argv[$i],'=');
+        $cp = strstr($argv[$i], '=');
         if (!$cp) {
             throw new Exception('INTERNAL ERROR: handleswitch passed bad argument, no "=" in arg');
         }
         $argv[$i] = substr($argv[$i], 0, strlen($argv[$i]) - strlen($cp));
-        if (!isset(self::$options[$argv[$i]])) {
+        if (!isset(self::$_options[$argv[$i]])) {
             throw new Exception('Command line syntax error: undefined option "' .  $argv[$i] .
                 $cp . '"');
         }
         $cp = substr($cp, 1);
-        switch (self::$options[$argv[$i]]['type']) {
-            case self::OPT_FLAG:
-            case self::OPT_FFLAG:
-                throw new Exception('Command line syntax error: option requires an argument "' .
-                    $argv[$i] . '=' . $cp . '"');
-            case self::OPT_DBL:
-            case self::OPT_FDBL:
-                $dv = (double) $cp;
-                break;
-            case self::OPT_INT:
-            case self::OPT_FINT:
-                $lv = (int) $cp;
-                break;
-            case self::OPT_STR:
-            case self::OPT_FSTR:
-                $sv = $cp;
-                break;
+        switch (self::$_options[$argv[$i]]['type']) {
+        case self::OPT_FLAG:
+        case self::OPT_FFLAG:
+            throw new Exception('Command line syntax error: option requires an argument "' .
+                $argv[$i] . '=' . $cp . '"');
+        case self::OPT_DBL:
+        case self::OPT_FDBL:
+            $dv = (double) $cp;
+            break;
+        case self::OPT_INT:
+        case self::OPT_FINT:
+            $lv = (int) $cp;
+            break;
+        case self::OPT_STR:
+        case self::OPT_FSTR:
+            $sv = $cp;
+            break;
         }
-        switch(self::$options[$argv[$i]]['type']) {
-            case self::OPT_FLAG:
-            case self::OPT_FFLAG:
-                break;
-            case self::OPT_DBL:
-                $this->{self::$options[$argv[$i]]['arg']} = $dv;
-                break;
-            case self::OPT_FDBL:
-                $this->{self::$options[$argv[$i]]['arg']}($dv);
-                break;
-            case self::OPT_INT:
-                $this->{self::$options[$argv[$i]]['arg']} = $lv;
-                break;
-            case self::OPT_FINT:
-                $this->{self::$options[$argv[$i]]['arg']}($lv);
-                break;
-            case self::OPT_STR:
-                $this->{self::$options[$argv[$i]]['arg']} = $sv;
-                break;
-            case self::OPT_FSTR:
-                $this->{self::$options[$argv[$i]]['arg']}($sv);
-                break;
+        switch(self::$_options[$argv[$i]]['type']) {
+        case self::OPT_FLAG:
+        case self::OPT_FFLAG:
+            break;
+        case self::OPT_DBL:
+            $this->{self::$_options[$argv[$i]]['arg']} = $dv;
+            break;
+        case self::OPT_FDBL:
+            $this->{self::$_options[$argv[$i]]['arg']}($dv);
+            break;
+        case self::OPT_INT:
+            $this->{self::$_options[$argv[$i]]['arg']} = $lv;
+            break;
+        case self::OPT_FINT:
+            $this->{self::$_options[$argv[$i]]['arg']}($lv);
+            break;
+        case self::OPT_STR:
+            $this->{self::$_options[$argv[$i]]['arg']} = $sv;
+            break;
+        case self::OPT_FSTR:
+            $this->{self::$_options[$argv[$i]]['arg']}($sv);
+            break;
         }
         return 0;
     }
 
     /**
-     * @param array arguments
-     * @param array valid options
+     * OptInit
+     *
+     * @param array $a Arguments
+     *
      * @return int
      */
     function OptInit($a)
@@ -259,11 +267,11 @@ class PHP_ParserGenerator
         $errcnt = 0;
         $argv = $a;
         try {
-            if (is_array($argv) && count($argv) && self::$options) {
-                for($i = 1; $i < count($argv); $i++) {
+            if (is_array($argv) && count($argv) && self::$_options) {
+                for ($i = 1; $i < count($argv); $i++) {
                     if ($argv[$i][0] == '+' || $argv[$i][0] == '-') {
                         $errcnt += $this->handleflags($i, $argv);
-                    } elseif (strstr($argv[$i],'=')) {
+                    } elseif (strstr($argv[$i], '=')) {
                         $errcnt += $this->handleswitch($i, $argv);
                     }
                 }
@@ -279,18 +287,20 @@ class PHP_ParserGenerator
     /**
      * Return the index of the N-th non-switch argument.  Return -1
      * if N is out of range.
-     * @param int
+     *
+     * @param int $n
+     * @param int $a
+     *
      * @return int
      */
-    private function argindex($n, $a)
+    private function _argindex($n, $a)
     {
         $dashdash = 0;
         if (!is_array($a) || !count($a)) {
             return -1;
         }
         for ($i=1; $i < count($a); $i++) {
-            if ($dashdash || !($a[$i][0] == '-' || $a[$i][0] == '+' ||
-                  strchr($a[$i], '='))) {
+            if ($dashdash || !($a[$i][0] == '-' || $a[$i][0] == '+' || strchr($a[$i], '='))) {
                 if ($n == 0) {
                     return $i;
                 }
@@ -306,28 +316,32 @@ class PHP_ParserGenerator
     /**
      * Return the value of the non-option argument as indexed by $i
      *
-     * @param int
-     * @param array the value of $argv
+     * @param int   $i
+     * @param array $a the value of $argv
+     *
      * @return 0|string
      */
-    private function OptArg($i, $a)
+    private function _optArg($i, $a)
     {
-        if (-1 == ($ind = $this->argindex($i, $a))) {
+        if (-1 == ($ind = $this->_argindex($i, $a))) {
             return 0;
         }
         return $a[$ind];
     }
 
     /**
+     * @param array $a
+     *
      * @return int number of arguments
      */
     function OptNArgs($a)
     {
         $cnt = $dashdash = 0;
         if (is_array($a) && count($a)) {
-            for($i = 1; $i < count($a); $i++) {
-                if ($dashdash || !($a[$i][0] == '-' || $a[$i][0] == '+' ||
-                      strchr($a[$i], '='))) {
+            for ($i = 1; $i < count($a); $i++) {
+                if ($dashdash
+                    || !($a[$i][0] == '-' || $a[$i][0] == '+' || strchr($a[$i], '='))
+                ) {
                     $cnt++;
                 }
                 if ($a[$i] == "--") {
@@ -340,56 +354,58 @@ class PHP_ParserGenerator
 
     /**
      * Print out command-line options
+     *
+     * @return void 
      */
     function OptPrint()
     {
         $max = 0;
-        foreach (self::$options as $label => $info) {
+        foreach (self::$_options as $label => $info) {
             $len = strlen($label) + 1;
             switch ($info['type']) {
-                case self::OPT_FLAG:
-                case self::OPT_FFLAG:
-                    break;
-                case self::OPT_INT:
-                case self::OPT_FINT:
-                    $len += 9;       /* length of "<integer>" */
-                    break;
-                case self::OPT_DBL:
-                case self::OPT_FDBL:
-                    $len += 6;       /* length of "<real>" */
-                    break;
-                case self::OPT_STR:
-                case self::OPT_FSTR:
-                    $len += 8;       /* length of "<string>" */
-                    break;
+            case self::OPT_FLAG:
+            case self::OPT_FFLAG:
+                break;
+            case self::OPT_INT:
+            case self::OPT_FINT:
+                $len += 9;       /* length of "<integer>" */
+                break;
+            case self::OPT_DBL:
+            case self::OPT_FDBL:
+                $len += 6;       /* length of "<real>" */
+                break;
+            case self::OPT_STR:
+            case self::OPT_FSTR:
+                $len += 8;       /* length of "<string>" */
+                break;
             }
             if ($len > $max) {
                 $max = $len;
             }
         }
-        foreach (self::$options as $label => $info) {
+        foreach (self::$_options as $label => $info) {
             switch ($info['type']) {
-                case self::OPT_FLAG:
-                case self::OPT_FFLAG:
-                    echo "  -$label";
-                    echo str_repeat(' ', $max - strlen($label));
-                    echo "  $info[message]\n";
-                    break;
-                case self::OPT_INT:
-                case self::OPT_FINT:
-                    echo "  $label=<integer>" . str_repeat(' ', $max - strlen($label) - 9);
-                    echo "  $info[message]\n";
-                    break;
-                case self::OPT_DBL:
-                case self::OPT_FDBL:
-                    echo "  $label=<real>" . str_repeat(' ', $max - strlen($label) - 6);
-                    echo "  $info[message]\n";
-                    break;
-                case self::OPT_STR:
-                case self::OPT_FSTR:
-                    echo "  $label=<string>" . str_repeat(' ', $max - strlen($label) - 8);
-                    echo "  $info[message]\n";
-                    break;
+            case self::OPT_FLAG:
+            case self::OPT_FFLAG:
+                echo "  -$label";
+                echo str_repeat(' ', $max - strlen($label));
+                echo "  $info[message]\n";
+                break;
+            case self::OPT_INT:
+            case self::OPT_FINT:
+                echo "  $label=<integer>" . str_repeat(' ', $max - strlen($label) - 9);
+                echo "  $info[message]\n";
+                break;
+            case self::OPT_DBL:
+            case self::OPT_FDBL:
+                echo "  $label=<real>" . str_repeat(' ', $max - strlen($label) - 6);
+                echo "  $info[message]\n";
+                break;
+            case self::OPT_STR:
+            case self::OPT_FSTR:
+                echo "  $label=<string>" . str_repeat(' ', $max - strlen($label) - 8);
+                echo "  $info[message]\n";
+                break;
             }
         }
     }
@@ -397,9 +413,12 @@ class PHP_ParserGenerator
     /**
     * This routine is called with the argument to each -D command-line option.
     * Add the macro defined to the azDefine array.
-    * @param string
+    *
+    * @param string $z
+    *
+    * @return void
     */
-    private function handle_D_option($z)
+    private function _handleDOption($z)
     {
         if ($a = strstr($z, '=')) {
             $z = substr($a, 1); // strip first =
@@ -408,18 +427,22 @@ class PHP_ParserGenerator
     }
 
     /**************** From the file "main.c" ************************************/
-/*
-** Main program file for the LEMON parser generator.
-*/
+    /*
+    ** Main program file for the LEMON parser generator.
+    */
 
 
-    /* The main program.  Parse the command line and do it... */
+    /**
+    * The main program.  Parse the command line and do it...
+    *
+    * @return int Number of error and conflicts
+    */
     function main()
     {
         $lem = new PHP_ParserGenerator_Data;
 
         $this->OptInit($_SERVER['argv']);
-        if ($this->version) {
+        if ($this->_version) {
             echo "Lemon version 1.0/PHP_ParserGenerator port version @package_version@\n";
             exit(0); 
         }
@@ -428,11 +451,11 @@ class PHP_ParserGenerator
             exit(1);
         }
         $lem->errorcnt = 0;
-        $lem->parser_template = $this->parser_template;
+        $lem->parser_template = $this->_parser_template;
 
         /* Initialize the machine */
         $lem->argv0 = $_SERVER['argv'][0];
-        $lem->filename = $this->OptArg(0, $_SERVER['argv']);
+        $lem->filename = $this->_optArg(0, $_SERVER['argv']);
         $a = pathinfo($lem->filename);
         if (isset($a['extension'])) {
             $ext = '.' . $a['extension'];
@@ -440,15 +463,13 @@ class PHP_ParserGenerator
         } else {
             $lem->filenosuffix = $lem->filename;
         }
-        $lem->basisflag = $this->basisflag;
+        $lem->basisflag = $this->_basisflag;
         $lem->has_fallback = 0;
         $lem->nconflict = 0;
-        $lem->name = $lem->include_code = $lem->include_classcode = $lem->arg =
-            $lem->tokentype = $lem->start = 0;
+        $lem->name = $lem->include_code = $lem->include_classcode = $lem->arg = $lem->tokentype = $lem->start = 0;
         $lem->vartype = 0;
         $lem->stacksize = 0;
-        $lem->error = $lem->overflow = $lem->failure = $lem->accept = $lem->tokendest =
-          $lem->tokenprefix = $lem->outname = $lem->extracode = 0;
+        $lem->error = $lem->overflow = $lem->failure = $lem->accept = $lem->tokendest = $lem->tokenprefix = $lem->outname = $lem->extracode = 0;
         $lem->vardest = 0;
         $lem->tablesize = 0;
         PHP_ParserGenerator_Symbol::Symbol_new("$");
@@ -477,11 +498,11 @@ class PHP_ParserGenerator
             $lem->symbols[$i]->index = $i;
         }
         // find the first lower-case symbol
-        for($i = 1; ord($lem->symbols[$i]->name[0]) <= ord ('Z'); $i++);
+        for ($i = 1; ord($lem->symbols[$i]->name[0]) <= ord('Z'); $i++);
         $lem->nterminal = $i;
 
         /* Generate a reprint of the grammar, if requested on the command line */
-        if ($this->rpflag) {
+        if ($this->_rpflag) {
             $this->Reprint();
         } else {
             /* Initialize the size for all follow and first sets */
@@ -510,7 +531,7 @@ class PHP_ParserGenerator
             $lem->FindActions();
 
             /* Compress the action tables */
-            if ($this->compress===0) {
+            if ($this->_compress===0) {
                 $lem->CompressTables();
             }
 
@@ -519,25 +540,33 @@ class PHP_ParserGenerator
             $lem->ResortStates();
 
             /* Generate a report of the parser generated.  (the "y.output" file) */
-            if (!$this->quiet) {
+            if (!$this->_quiet) {
                 $lem->ReportOutput();
             }
 
             /* Generate the source code for the parser */
-            $lem->ReportTable($this->mhflag);
+            $lem->ReportTable($this->_mhflag);
 
-    /* Produce a header file for use by the scanner.  (This step is
-    ** omitted if the "-m" option is used because makeheaders will
-    ** generate the file for us.) */
-//            if (!$this->mhflag) {
-//                $this->ReportHeader();
-//            }
+            /* Produce a header file for use by the scanner.  (This step is
+            ** omitted if the "-m" option is used because makeheaders will
+            ** generate the file for us.) */
+            //if (!$this->_mhflag) {
+            //    $this->ReportHeader();
+            //}
         }
-        if ($this->statistics) {
-            printf("Parser statistics: %d terminals, %d nonterminals, %d rules\n",
-                $lem->nterminal, $lem->nsymbol - $lem->nterminal, $lem->nrule);
-            printf("                   %d states, %d parser table entries, %d conflicts\n",
-                $lem->nstate, $lem->tablesize, $lem->nconflict);
+        if ($this->_statistics) {
+            printf(
+                "Parser statistics: %d terminals, %d nonterminals, %d rules\n",
+                $lem->nterminal,
+                $lem->nsymbol - $lem->nterminal,
+                $lem->nrule
+            );
+            printf(
+                "                   %d states, %d parser table entries, %d conflicts\n",
+                $lem->nstate,
+                $lem->tablesize,
+                $lem->nconflict
+            );
         }
         if ($lem->nconflict) {
             printf("%d parsing conflicts.\n", $lem->nconflict);
@@ -546,30 +575,37 @@ class PHP_ParserGenerator
         return ($lem->errorcnt + $lem->nconflict);
     }
 
+    /**
+     * SetSize
+     * 
+     * @param int $n 
+     *
+     * @access public
+     * @return void
+     */
     function SetSize($n)
     {
-        $this->size = $n + 1;
+        $this->_size = $n + 1;
     }
 
     /**
      * Merge in a merge sort for a linked list
-     * Inputs:
-     *  - a:       A sorted, null-terminated linked list.  (May be null).
-     *  - b:       A sorted, null-terminated linked list.  (May be null).
-     *  - cmp:     A pointer to the comparison function.
-     *  - offset:  Offset in the structure to the "next" field.
-     *
-     * Return Value:
-     *   A pointer to the head of a sorted list containing the elements
-     *   of both a and b.
      *
      * Side effects:
      *   The "next" pointers for elements in the lists a and b are
      *   changed.
+     *
+     * @param mixed    $a      A sorted, null-terminated linked list.  (May be null).
+     * @param mixed    $b      A sorted, null-terminated linked list.  (May be null).
+     * @param function $cmp    A pointer to the comparison function.
+     * @param integer  $offset Offset in the structure to the "next" field.
+     *
+     * @return mixed A pointer to the head of a sorted list containing the
+     *               elements of both a and b.
      */
     static function merge($a, $b, $cmp, $offset)
     {
-        if($a === 0) {
+        if ($a === 0) {
             $head = $b;
         } elseif ($b === 0) {
             $head = $a;
@@ -602,20 +638,18 @@ class PHP_ParserGenerator
         return $head;
     }
     
-    /*
-    ** Inputs:
-    **   list:      Pointer to a singly-linked list of structures.
-    **   next:      Pointer to pointer to the second element of the list.
-    **   cmp:       A comparison function.
-    **
-    ** Return Value:
-    **   A pointer to the head of a sorted list containing the elements
-    **   orginally in list.
-    **
-    ** Side effects:
-    **   The "next" pointers for elements in list are changed.
-    */
     #define LISTSIZE 30
+    /**
+    * Side effects:
+    *   The "next" pointers for elements in list are changed.
+    *
+    * @param mixed    $list Pointer to a singly-linked list of structures.
+    * @param mixed    $next Pointer to pointer to the second element of the list.
+    * @param function $cmp  A comparison function.
+    *
+    * @return mixed A pointer to the head of a sorted list containing the
+    * elements orginally in list.
+    */
     static function msort($list, $next, $cmp)
     {
         if ($list === 0) {
@@ -683,14 +717,20 @@ class PHP_ParserGenerator
         $errmsg = vsprintf($format, $ap);
         $linewidth = strlen($errmsg);
         /* Remove trailing "\n"s from the error message. */
-        while ($linewidth > 0 && in_array($errmsg[$linewidth-1], array("\n", "\r"), true)) {
+        while ($linewidth > 0
+            && in_array($errmsg[$linewidth-1], array("\n", "\r"), true)
+        ) {
             --$linewidth;
             $errmsg = substr($errmsg, 0, strlen($errmsg) - 1);
         }
         
         /* Print the error message */
         $base = 0;
-        $errmsg = str_replace(array("\r", "\n", "\t"), array(' ', ' ', ' '), $errmsg);
+        $errmsg = str_replace(
+            array("\r", "\n", "\t"),
+            array(' ', ' ', ' '),
+            $errmsg
+        );
         while (strlen($errmsg)) {
             $end = $restart = self::findbreak($errmsg, 0, $availablewidth);
             if (strlen($errmsg) <= 79 && $end < strlen($errmsg) && $end <= 79) {
@@ -707,6 +747,8 @@ class PHP_ParserGenerator
     /**
      * Duplicate the input file without comments and without actions 
      * on rules
+     *
+     * @return void
      */
     function Reprint()
     {
@@ -735,7 +777,7 @@ class PHP_ParserGenerator
         }
         for ($rp = $this->rule; $rp; $rp = $rp->next) {
             printf("%s", $rp->lhs->name);
-/*          if ($rp->lhsalias) {
+            /*if ($rp->lhsalias) {
                 printf("(%s)", $rp->lhsalias);
             }*/
             print " ::=";
@@ -747,7 +789,7 @@ class PHP_ParserGenerator
                         printf("|%s", $sp->subsym[$j]->name);
                     }
                 }
-/*              if ($rp->rhsalias[$i]) {
+                /*if ($rp->rhsalias[$i]) {
                     printf("(%s)", $rp->rhsalias[$i]);
                 }*/
             }
@@ -755,14 +797,10 @@ class PHP_ParserGenerator
             if ($rp->precsym) {
                 printf(" [%s]", $rp->precsym->name);
             }
-/*          if ($rp->code) {
+            /*if ($rp->code) {
                 print "\n    " . $rp->code);
             }*/
             print "\n";
         }
     }
 }
-//$a = new PHP_ParserGenerator;
-//$_SERVER['argv'] = array('lemon', '-s', '/development/lemon/PHP_Parser.y');
-//$_SERVER['argv'] = array('lemon', '-s', '/development/File_ChessPGN/ChessPGN/Parser.y');
-//$a->main();

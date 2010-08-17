@@ -13,22 +13,25 @@
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
- * @category   php
- * @package    PHP_ParserGenerator
- * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2006 Gregory Beaver
- * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
- * @version    CVS: $Id$
- * @since      File available since Release 0.1.0
+ * @category  PHP
+ * @package   PHP_ParserGenerator
+ * @author    Gregory Beaver <cellog@php.net>
+ * @copyright 2006 Gregory Beaver
+ * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/PHP_ParserGenerator
+ * @since     File available since Release 0.1.0
  */
 /**
  * The grammar parser for lemon grammar files.
  * 
- * @package    PHP_ParserGenerator
- * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2006 Gregory Beaver
- * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
- * @since      Class available since Release 0.1.0
+ * @category  PHP
+ * @package   PHP_ParserGenerator
+ * @author    Gregory Beaver <cellog@php.net>
+ * @copyright 2006 Gregory Beaver
+ * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @link      http://pear.php.net/package/PHP_ParserGenerator
+ * @since     Class available since Release 0.1.0
  */
 class PHP_ParserGenerator_Parser
 {

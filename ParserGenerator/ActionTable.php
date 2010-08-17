@@ -37,23 +37,27 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   php
- * @package    PHP_ParserGenerator
- * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2006 Gregory Beaver
- * @license    http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id$
- * @since      File available since Release 0.1.0
+ * @category  PHP
+ * @package   PHP_ParserGenerator
+ * @author    Gregory Beaver <cellog@php.net>
+ * @copyright 2006 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/PHP_ParserGenerator
+ * @since     File available since Release 0.1.0
  */
 /**
  * The state of the yy_action table under construction is an instance of
  * the following structure
- * @package    PHP_ParserGenerator
- * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2006 Gregory Beaver
- * @license    http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @version    @package_version@
- * @since      Class available since Release 0.1.0
+ *
+ * @category  PHP
+ * @package   PHP_ParserGenerator
+ * @author    Gregory Beaver <cellog@php.net>
+ * @copyright 2006 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @version   Release: @package_version@
+ * @link      http://pear.php.net/package/PHP_ParserGenerator
+ * @since     Class available since Release 0.1.0
  */
 class PHP_ParserGenerator_ActionTable
 {
@@ -75,22 +79,24 @@ class PHP_ParserGenerator_ActionTable
      * @see PHP_ParserGenerator_Data::compute_action()
      * @var array
      */
-    public $aAction =
-        array(array(
+    public $aAction = array(
+        array(
             'lookahead' => -1,
             'action' => -1
-        ));
+        )
+    );
     /**
      * A single new transaction set.
      *
      * @see $aAction format of the internal array is described here
      * @var array
      */
-    public $aLookahead =
-        array(array(
+    public $aLookahead = array(
+        array(
             'lookahead' => 0,
             'action' => 0
-        ));
+        )
+    );
     /**
      * The smallest (minimum) value of any lookahead token in {@link $aLookahead}
      * 
@@ -122,8 +128,11 @@ class PHP_ParserGenerator_ActionTable
 
     /**
      * Add a new action to the current transaction set
-     * @param int
-     * @param int
+     *
+     * @param int $lookahead
+     * @param int $action
+     *
+     * @return void
      */
     function acttab_action($lookahead, $action)
     {
@@ -153,6 +162,7 @@ class PHP_ParserGenerator_ActionTable
      * to an empty set in preparation for a new round of acttab_action() calls.
      *
      * Return the offset into the action table of the new transaction.
+     *
      * @return int Return the offset that should be added to the lookahead in
      * order to get the index into $yy_action of the action.  This will be used
      * in generation of $yy_ofst tables (reduce and shift)
@@ -211,8 +221,7 @@ class PHP_ParserGenerator_ActionTable
                             'action' => -1,
                         );
                     }
-                    if ($this->aAction[$j]['lookahead'] == $j +
-                          $this->mnLookahead - $i) {
+                    if ($this->aAction[$j]['lookahead'] == $j + $this->mnLookahead - $i) {
                         break;
                     }
                 }
@@ -235,12 +244,10 @@ class PHP_ParserGenerator_ActionTable
                             'action' => -1,
                         );
                     }
-                    if ($this->aLookahead[$j]['lookahead'] != 
-                          $this->aAction[$k]['lookahead']) {
+                    if ($this->aLookahead[$j]['lookahead'] != $this->aAction[$k]['lookahead']) {
                         break;
                     }
-                    if ($this->aLookahead[$j]['action'] !=
-                          $this->aAction[$k]['action']) {
+                    if ($this->aLookahead[$j]['action'] != $this->aAction[$k]['action']) {
                         break;
                     }
                 }
@@ -258,8 +265,7 @@ class PHP_ParserGenerator_ActionTable
                     if ($this->aAction[$j]['lookahead'] < 0) {
                         continue;
                     }
-                    if ($this->aAction[$j]['lookahead'] == $j +
-                          $this->mnLookahead - $i) {
+                    if ($this->aAction[$j]['lookahead'] == $j + $this->mnLookahead - $i) {
                         $n++;
                     }
                 }

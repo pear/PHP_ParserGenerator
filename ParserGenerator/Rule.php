@@ -37,25 +37,29 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   php
- * @package    PHP_ParserGenerator
- * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2006 Gregory Beaver
- * @license    http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id$
- * @since      File available since Release 0.1.0
+ * @category  PHP
+ * @package   PHP_ParserGenerator
+ * @author    Gregory Beaver <cellog@php.net>
+ * @copyright 2006 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/PHP_ParserGenerator
+ * @since     File available since Release 0.1.0
  */
 /**
  * Each production rule in the grammar is stored in this class
  * 
- * @package    PHP_ParserGenerator
- * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2006 Gregory Beaver
- * @license    http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @version    @package_version@
- * @since      Class available since Release 0.1.0
+ * @category  PHP
+ * @package   PHP_ParserGenerator
+ * @author    Gregory Beaver <cellog@php.net>
+ * @copyright 2006 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @version   Release: @package_version@
+ * @link      http://pear.php.net/package/PHP_ParserGenerator
+ * @since     Class available since Release 0.1.0
  */
-class PHP_ParserGenerator_Rule {
+class PHP_ParserGenerator_Rule
+{
     /**
      * Left-hand side of the rule
      * @var array an array of {@link PHP_ParserGenerator_Symbol} objects

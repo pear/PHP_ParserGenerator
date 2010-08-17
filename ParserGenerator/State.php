@@ -37,24 +37,28 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   php
- * @package    PHP_ParserGenerator
- * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2006 Gregory Beaver
- * @license    http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id$
- * @since      File available since Release 0.1.0
+ * @category  PHP
+ * @package   PHP_ParserGenerator
+ * @author    Gregory Beaver <cellog@php.net>
+ * @copyright 2006 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/PHP_ParserGenerator
+ * @since     File available since Release 0.1.0
  */
 
 /**
  * The structure used to represent a state in the associative array
  * for a PHP_ParserGenerator_Config.
- * @package    PHP_ParserGenerator
- * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2006 Gregory Beaver
- * @license    http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @version    @package_version@
- * @since      Class available since Release 0.1.0
+ *
+ * @category  PHP
+ * @package   PHP_ParserGenerator
+ * @author    Gregory Beaver <cellog@php.net>
+ * @copyright 2006 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @version   Release: @package_version@
+ * @link      http://pear.php.net/package/PHP_ParserGenerator
+ * @since     Class available since Release 0.1.0
  */
 class PHP_ParserGenerator_StateNode
 {
@@ -68,14 +72,16 @@ class PHP_ParserGenerator_StateNode
  * Each state of the generated parser's finite state machine
  * is encoded as an instance of this class
  * 
- * @package    PHP_ParserGenerator
- * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2006 Gregory Beaver
- * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
- * @version    @package_version@
- * @since      Class available since Release 0.1.0
+ * @package   PHP_ParserGenerator
+ * @author    Gregory Beaver <cellog@php.net>
+ * @copyright 2006 Gregory Beaver
+ * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version   Release: @package_version@
+ * @link      http://pear.php.net/package/PHP_ParserGenerator
+ * @since     Class available since Release 0.1.0
  */
-class PHP_ParserGenerator_State {
+class PHP_ParserGenerator_State
+{
     /**
      * The basis configurations for this state
      * @var PHP_ParserGenerator_Config
@@ -183,6 +189,7 @@ class PHP_ParserGenerator_State {
 
     /**
      * Hash a state based on its configuration
+     *
      * @return int
      */
     private static function statehash(PHP_ParserGenerator_Config $a)
@@ -228,8 +235,7 @@ class PHP_ParserGenerator_State {
      * @param PHP_ParserGenerator_Config $key
      * @return unknown
      */
-    static function State_insert(PHP_ParserGenerator_State $state,
-                                 PHP_ParserGenerator_Config $key)
+    static function State_insert(PHP_ParserGenerator_State $state, PHP_ParserGenerator_Config $key)
     {
         $h = self::statehash($key);
         if (isset(self::$x3a[$h])) {

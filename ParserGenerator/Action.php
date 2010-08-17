@@ -37,25 +37,30 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   php
- * @package    PHP_ParserGenerator
- * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2006 Gregory Beaver
- * @license    http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id$
- * @since      File available since Release 0.1.0
+ * @category  PHP
+ * @package   PHP_ParserGenerator
+ * @author    Gregory Beaver <cellog@php.net>
+ * @copyright 2006 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/PHP_ParserGenerator
+ * @since     File available since Release 0.1.0
  */
+
 /**
  * Every shift or reduce operation is stored as one of the following objects.
  * 
- * @package    PHP_ParserGenerator
- * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2006 Gregory Beaver
- * @license    http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @version    @package_version@
- * @since      Class available since Release 0.1.0
+ * @category  PHP
+ * @package   PHP_ParserGenerator
+ * @author    Gregory Beaver <cellog@php.net>
+ * @copyright 2006 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @version   Release: @package_version@
+ * @link      http://pear.php.net/package/PHP_ParserGenerator
+ * @since     Class available since Release 0.1.0
  */
-class PHP_ParserGenerator_Action {
+class PHP_ParserGenerator_Action
+{
     const SHIFT = 1,
     ACCEPT = 2,
     REDUCE = 3,
@@ -114,8 +119,7 @@ class PHP_ParserGenerator_Action {
      * 
      * This is used by {@link Action_sort()} to compare actions
      */
-    static function actioncmp(PHP_ParserGenerator_Action $ap1,
-                              PHP_ParserGenerator_Action $ap2)
+    static function actioncmp(PHP_ParserGenerator_Action $ap1, PHP_ParserGenerator_Action $ap2)
     {
         $rc = $ap1->sp->index - $ap2->sp->index;
         if ($rc === 0) {
@@ -133,16 +137,18 @@ class PHP_ParserGenerator_Action {
                         $ap2->x->cfp->rp->ruleline . ')');
                 }
             }
-            if ($ap1->type != self::REDUCE &&
-            $ap1->type != self::RD_RESOLVED &&
-            $ap1->type != self::CONFLICT) {
+            if ($ap1->type != self::REDUCE
+                && $ap1->type != self::RD_RESOLVED
+                && $ap1->type != self::CONFLICT
+            ) {
                 throw new Exception('action has not been processed: ' .
                 $ap1->sp->name . ' on line ' . $ap1->x->cfp->rp->ruleline .
                 ', rule ' . $ap1->x->cfp->rp->lhs->name);
             }
-            if ($ap2->type != self::REDUCE &&
-            $ap2->type != self::RD_RESOLVED &&
-            $ap2->type != self::CONFLICT) {
+            if ($ap2->type != self::REDUCE
+                && $ap2->type != self::RD_RESOLVED
+                && $ap2->type != self::CONFLICT
+            ) {
                 throw new Exception('action has not been processed: ' .
                 $ap2->sp->name . ' on line ' . $ap2->x->cfp->rp->ruleline .
                 ', rule ' . $ap2->x->cfp->rp->lhs->name);
@@ -173,10 +179,10 @@ class PHP_ParserGenerator_Action {
     /**
      * create linked list of PHP_ParserGenerator_Actions
      *
-     * @param PHP_ParserGenerator_Action|null
-     * @param int one of the class constants from PHP_ParserGenerator_Action
-     * @param PHP_ParserGenerator_Symbol
-     * @param PHP_ParserGenerator_State|PHP_ParserGenerator_Rule
+     * @param PHP_ParserGenerator_Action|null                    $app
+     * @param int                                                $type one of the class constants from PHP_ParserGenerator_Action
+     * @param PHP_ParserGenerator_Symbol                         $sp
+     * @param PHP_ParserGenerator_State|PHP_ParserGenerator_Rule $arg
      */
     static function Action_add(&$app, $type, PHP_ParserGenerator_Symbol $sp, $arg)
     {
@@ -192,7 +198,12 @@ class PHP_ParserGenerator_Action {
 
     /**
      * Sort parser actions
+     *
+     * @param PHP_ParserGenerator_Action $ap a parser action
+     *
      * @see PHP_ParserGenerator_Data::FindActions()
+     *
+     * @return PHP_ParserGenerator_Action
      */
     static function Action_sort(PHP_ParserGenerator_Action $ap)
     {
@@ -203,7 +214,13 @@ class PHP_ParserGenerator_Action {
     /**
      * Print an action to the given file descriptor.  Return FALSE if
      * nothing was actually printed.
+     *
+     * @param resource $fp     File descriptor to print on
+     * @param integer  $indent Number of indents
+     *
      * @see PHP_ParserGenerator_Data::ReportOutput()
+     *
+     * @return int|false
      */
     function PrintAction($fp, $indent)
     {
@@ -213,26 +230,26 @@ class PHP_ParserGenerator_Action {
         $result = 1;
         switch ($this->type)
         {
-            case self::SHIFT:
-                fprintf($fp, "%${indent}s shift  %d", $this->sp->name, $this->x->statenum);
-                break;
-            case self::REDUCE:
-                fprintf($fp, "%${indent}s reduce %d", $this->sp->name, $this->x->index);
-                break;
-            case self::ACCEPT:
-                fprintf($fp, "%${indent}s accept", $this->sp->name);
-                break;
-            case self::ERROR:
-                fprintf($fp, "%${indent}s error", $this->sp->name);
-                break;
-            case self::CONFLICT:
-                fprintf($fp, "%${indent}s reduce %-3d ** Parsing conflict **", $this->sp->name, $this->x->index);
-                break;
-            case self::SH_RESOLVED:
-            case self::RD_RESOLVED:
-            case self::NOT_USED:
-                $result = 0;
-                break;
+        case self::SHIFT:
+            fprintf($fp, "%${indent}s shift  %d", $this->sp->name, $this->x->statenum);
+            break;
+        case self::REDUCE:
+            fprintf($fp, "%${indent}s reduce %d", $this->sp->name, $this->x->index);
+            break;
+        case self::ACCEPT:
+            fprintf($fp, "%${indent}s accept", $this->sp->name);
+            break;
+        case self::ERROR:
+            fprintf($fp, "%${indent}s error", $this->sp->name);
+            break;
+        case self::CONFLICT:
+            fprintf($fp, "%${indent}s reduce %-3d ** Parsing conflict **", $this->sp->name, $this->x->index);
+            break;
+        case self::SH_RESOLVED:
+        case self::RD_RESOLVED:
+        case self::NOT_USED:
+            $result = 0;
+            break;
         }
         return $result;
     }

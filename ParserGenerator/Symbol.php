@@ -37,23 +37,26 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   php
- * @package    PHP_ParserGenerator
- * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2006 Gregory Beaver
- * @license    http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id$
- * @since      File available since Release 0.1.0
+ * @category  PHP
+ * @package   PHP_ParserGenerator
+ * @author    Gregory Beaver <cellog@php.net>
+ * @copyright 2006 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/PHP_ParserGenerator
+ * @since     File available since Release 0.1.0
  */
 /**
  * Symbols (terminals and nonterminals) of the grammar are stored in this class
  * 
- * @package    PHP_ParserGenerator
- * @author     Gregory Beaver <cellog@php.net>
- * @copyright  2006 Gregory Beaver
- * @license    http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @version    @package_version@
- * @since      Class available since Release 0.1.0
+ * @category  PHP
+ * @package   PHP_ParserGenerator
+ * @author    Gregory Beaver <cellog@php.net>
+ * @copyright 2006 Gregory Beaver
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @version   Release: @package_version@
+ * @link      http://pear.php.net/package/PHP_ParserGenerator
+ * @since     Class available since Release 0.1.0
  */
 class PHP_ParserGenerator_Symbol
 {
@@ -197,7 +200,7 @@ class PHP_ParserGenerator_Symbol
      *
      * @var array an array of PHP_ParserGenerator_Symbol objects
      */
-    private static $symbol_table = array();
+    private static $_symbol_table = array();
     /**
      * Return a pointer to the (terminal or nonterminal) symbol "x".
      * Create a new symbol if this is the first time "x" has been seen.
@@ -207,8 +210,8 @@ class PHP_ParserGenerator_Symbol
      */
     public static function Symbol_new($x)
     {
-        if (isset(self::$symbol_table[$x])) {
-            return self::$symbol_table[$x];
+        if (isset(self::$_symbol_table[$x])) {
+            return self::$_symbol_table[$x];
         }
         $sp = new PHP_ParserGenerator_Symbol;
         $sp->name = $x;
@@ -221,28 +224,29 @@ class PHP_ParserGenerator_Symbol
         $sp->lambda = false;
         $sp->destructor = 0;
         $sp->datatype = 0;
-        self::$symbol_table[$sp->name] = $sp;
+        self::$_symbol_table[$sp->name] = $sp;
         return $sp;
     }
 
     /**
      * Return the number of unique symbols
+     *
      * @return int
      */
     public static function Symbol_count()
     {
-        return count(self::$symbol_table);
+        return count(self::$_symbol_table);
     }
 
     public static function Symbol_arrayof()
     {
-        return array_values(self::$symbol_table);
+        return array_values(self::$_symbol_table);
     }
 
     public static function Symbol_find($x)
     {
-        if (isset(self::$symbol_table[$x])) {
-            return self::$symbol_table[$x];
+        if (isset(self::$_symbol_table[$x])) {
+            return self::$_symbol_table[$x];
         }
         return 0;
     }
