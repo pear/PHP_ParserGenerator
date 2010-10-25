@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.9.0RC1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.9.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>PHP_ParserGenerator</name>
  <channel>pear.php.net</channel>
  <summary>translate grammar files in Lemon Parser Generator format into a PHP 5 parser</summary>
@@ -28,10 +28,10 @@
   <email>cellog@php.net</email>
   <active>no</active>
  </lead>
- <date>2010-03-05</date>
- <time>06:09:13</time>
+ <date>2010-10-25</date>
+ <time>23:07:53</time>
  <version>
-  <release>0.1.6</release>
+  <release>0.1.7</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -40,78 +40,63 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
  <notes>
-- fix Bug #11645: unused rhs labels undetected [r0vert]
-- fix Bug #11647: substitution of @X works incorrectly [r0vert]
-- Bug #10685 	fatal error when calling &quot;phplemon --help&quot;
+Automatically built QA release
+Req #11361 better help message - cweiske
+
+Bug #12652 Generated ParseryyToken class has broken __toString() - urkle
+
+Bug #12730 Generated Parser destructor *can* loop forever - urkle
+
+Req #13416 Provide an option to choose the parser template file - rix0r
+
+Bug #16703 terminals starting with Z letter cause problems - taras
+
+Bug #17381 infinite loop in __destruct of generated parser - jespino
+
+Bug #17382 Empty action causes undefined function - jespino
  </notes>
  <contents>
   <dir baseinstalldir="PHP" name="/">
-   <file baseinstalldir="PHP" md5sum="c145706ed8666c45f915f1593e9b5a09" name="examples/Parser.php" role="doc" />
-   <file baseinstalldir="PHP" md5sum="9863909698add5cbe3b97498449783a2" name="examples/Parser.y" role="doc" />
-   <file baseinstalldir="PHP" md5sum="9d00754b4311bf5975f350fa5deefe29" name="examples/test.php" role="doc" />
-   <file baseinstalldir="PHP" md5sum="3f1b4c524412d6b98ed94ea9ec37ec8c" name="ParserGenerator/Action.php" role="php">
-    <tasks:replace from="@package_version@" to="version" type="package-info" />
-   </file>
-   <file baseinstalldir="PHP" md5sum="2b66c757aa3fb0476c29106e21f03dfa" name="ParserGenerator/ActionTable.php" role="php">
-    <tasks:replace from="@package_version@" to="version" type="package-info" />
-   </file>
-   <file baseinstalldir="PHP" md5sum="c2d73ae769b44142a350360b01b03803" name="ParserGenerator/cli.php" role="php" />
-   <file baseinstalldir="PHP" md5sum="99fe0b4616b18614c768bf9651bea6c7" name="ParserGenerator/Config.php" role="php">
-    <tasks:replace from="@package_version@" to="version" type="package-info" />
-   </file>
-   <file baseinstalldir="PHP" md5sum="b4a63237b8d4137f32f92594220c9319" name="ParserGenerator/Data.php" role="php">
-    <tasks:replace from="@package_version@" to="version" type="package-info" />
-   </file>
-   <file baseinstalldir="PHP" md5sum="e762dea90fe51a492cee1c8d970dbcaa" name="ParserGenerator/Parser.php" role="php">
-    <tasks:replace from="@package_version@" to="version" type="package-info" />
-   </file>
-   <file baseinstalldir="PHP" md5sum="60991c0d06678b197479f33d82e0591f" name="ParserGenerator/PropagationLink.php" role="php">
-    <tasks:replace from="@package_version@" to="version" type="package-info" />
-   </file>
-   <file baseinstalldir="PHP" md5sum="734e61a21f95fa6c4ba74277c6e0bc0e" name="ParserGenerator/Rule.php" role="php">
-    <tasks:replace from="@package_version@" to="version" type="package-info" />
-   </file>
-   <file baseinstalldir="PHP" md5sum="c8458b6f364edf791b931f3dac0988dc" name="ParserGenerator/State.php" role="php">
-    <tasks:replace from="@package_version@" to="version" type="package-info" />
-   </file>
-   <file baseinstalldir="PHP" md5sum="79223b583fef824a51d30c42e767fb7b" name="ParserGenerator/Symbol.php" role="php">
-    <tasks:replace from="@package_version@" to="version" type="package-info" />
-   </file>
-   <file baseinstalldir="PHP" md5sum="60515b91f81bad0e963517ce0795a0f6" name="tests/bug9346.php" role="test" />
-   <file baseinstalldir="PHP" md5sum="5b500fca7d60007ad3ca05911b90ca49" name="tests/bug9346.y" role="test" />
+   <file baseinstalldir="PHP" md5sum="13a3398a51beea9dec65dfb05d52e35d" name="examples/Parser.php" role="doc" />
+   <file baseinstalldir="PHP" md5sum="45e1ad9672d1c88e8f650c2b16bda451" name="examples/Parser.y" role="doc" />
+   <file baseinstalldir="PHP" md5sum="cb1c3cc445e64a06081ef043dab688ae" name="examples/test.php" role="doc" />
+   <file baseinstalldir="PHP" md5sum="163043b3424d1001f185b69fec93efd9" name="ParserGenerator/Action.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="9199c66aeefb2701064e168dde22fc56" name="ParserGenerator/ActionTable.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="fa3601611a067d9dd0b219940bd0f1c5" name="ParserGenerator/cli.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="b2c8aa1f459c1c7f2361867e34c4b57f" name="ParserGenerator/Config.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="775a429b754987c021e200925fd9b8b5" name="ParserGenerator/Data.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="da706529f3c0e26e375b0d6dc75fd74c" name="ParserGenerator/Parser.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="1e1abcc1b67a153ed93593a51588dd93" name="ParserGenerator/PropagationLink.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="4c0681e73709d4e362d50643bc1cb670" name="ParserGenerator/Rule.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="82606ba5e842bca349ef0da59fb0fc9c" name="ParserGenerator/State.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="45740f2626eb12ff32f8a77307e30b71" name="ParserGenerator/Symbol.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="d2523086d34679f251e66680c902fd48" name="tests/bug9346.php" role="test" />
+   <file baseinstalldir="PHP" md5sum="55c11b24455f280fba2a1ec197759306" name="tests/bug9346.y" role="test" />
    <file baseinstalldir="PHP" md5sum="4689ea4dce57beb3ba3a79411d7be5f7" name="tutorials/PHP_ParserGenerator/PHP_ParserGenerator.pkg" role="data" />
-   <file baseinstalldir="PHP" md5sum="f6d960589a6fd5435d50a67157d2f937" name="docs.ini" role="data" />
-   <file baseinstalldir="PHP" md5sum="76bb4b096d7b677ee4fcd99e34dfd60a" name="Lemon.php" role="php" />
-   <file baseinstalldir="PHP" md5sum="18a8d63be1e2ad0ed97c36a221583ffe" name="Lempar.php" role="php">
-    <tasks:replace from="@package_version@" to="version" type="package-info" />
-   </file>
-   <file baseinstalldir="PHP" md5sum="902a2a4e5a9a0b7bc2340005e0780812" name="LICENSE.txt" role="doc" />
-   <file baseinstalldir="PHP" md5sum="785f9854bd8cf49dd666945b83106b98" name="Main.php" role="php" />
-   <file baseinstalldir="PHP" md5sum="704b20a1bb60ec8f85bd7f97ed1b7a20" name="oops.out" role="data" />
-   <file baseinstalldir="PHP" md5sum="51c7e3e9e61fa7d39378395bb9a0f9d0" name="oops.php" role="php" />
-   <file baseinstalldir="PHP" md5sum="7103457ac33952f7e8d9cfc4fd11395e" name="oops.y" role="data" />
-   <file baseinstalldir="PHP" md5sum="156c00ec2bb20e086330bc0884363d56" name="parsephp.php" role="php" />
-   <file baseinstalldir="PHP" md5sum="4ff749a413933f7c3e78cc3a9f72d89e" name="ParserGenerator.php" role="php">
-    <tasks:replace from="@package_version@" to="version" type="package-info" />
-   </file>
-   <file baseinstalldir="PHP" md5sum="d443ebbde134ac3727ccabb64e5a431a" name="PHP.out" role="data" />
-   <file baseinstalldir="PHP" md5sum="141df71964ddb13ee506b36796f5dc65" name="PHP.php" role="php" />
-   <file baseinstalldir="PHP" md5sum="65a2b5a995719e9ce79e9512d6bd489d" name="PHP.y" role="data" />
-   <file baseinstalldir="" md5sum="b14453392354ff594ecea21e357fd169" name="phplemon" role="script">
-    <tasks:replace from="@php_bin@" to="php_bin" type="pear-config" />
-    <tasks:replace from="@php_dir@" to="php_dir" type="pear-config" />
+   <file baseinstalldir="PHP" md5sum="64739c8c3a318b8e1ee493072bfd059e" name="docs.ini" role="data" />
+   <file baseinstalldir="PHP" md5sum="eb1a57330fa275cd80a199d13312e740" name="Lemon.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="0ab4f403c93df4a6148aecd784724f2a" name="Lempar.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="e26fdb8b090d1291743f5c525ae492a7" name="LICENSE.txt" role="doc" />
+   <file baseinstalldir="PHP" md5sum="d19e31ae983a5d0b7d9265bb3c0c191c" name="Main.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="3deac2dba913107c07a77235840a4b6e" name="oops.out" role="data" />
+   <file baseinstalldir="PHP" md5sum="70f68535776d865827c7d240b1a005bf" name="oops.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="9be9d09b2ec404273e7b335f7e27c933" name="oops.y" role="data" />
+   <file baseinstalldir="PHP" md5sum="5ad6b1c3c4e33132e7d8f3daeb999c5a" name="parsephp.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="5e1d6815fbe0a207a9b48d7de9c1ad96" name="ParserGenerator.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="8542d100889c858b031934d49961dbb4" name="PHP.out" role="data" />
+   <file baseinstalldir="PHP" md5sum="8a5c404c50998d8affe0cd8faff4ae81" name="PHP.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="b8946769cadb6dddccd4ffb6bff42b6a" name="PHP.y" role="data" />
+   <file baseinstalldir="" md5sum="9ea08e9573f3ce76a2fd3694ad5e75bd" name="phplemon" role="script">
     <tasks:unixeol />
    </file>
    <file baseinstalldir="" md5sum="f275bad665127fe5f785d82f8b37190f" name="phplemon.bat" role="script">
-    <tasks:replace from="@php-bin@" to="php_bin" type="pear-config" />
-    <tasks:replace from="@php-dir@" to="php_dir" type="pear-config" />
     <tasks:windowseol />
    </file>
-   <file baseinstalldir="PHP" md5sum="03ec168af909fe0e9ffbbe121386b0c9" name="PHP_Parser.out" role="data" />
-   <file baseinstalldir="PHP" md5sum="cc03a9efe4f271fa7418ba02a55cf57c" name="PHP_Parser.php" role="php" />
-   <file baseinstalldir="PHP" md5sum="6b44338703d3725ae09260513122d57c" name="PHP_Parser.y" role="data" />
-   <file baseinstalldir="PHP" md5sum="beca76c5cf08519469502eac27b14850" name="raw_php.y" role="data" />
-   <file baseinstalldir="PHP" md5sum="a4f21a14038ac9d754344a6f811e39fb" name="Tokenizer.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="90840f182a21347dbcc27b8023cd0fb2" name="PHP_Parser.out" role="data" />
+   <file baseinstalldir="PHP" md5sum="5f21a55b2237783399cdbe72d7bd746d" name="PHP_Parser.php" role="php" />
+   <file baseinstalldir="PHP" md5sum="4e7cc9333b36a27c53a1cc84ac5dceab" name="PHP_Parser.y" role="data" />
+   <file baseinstalldir="PHP" md5sum="e2418944d1d5f8d0e2b85ceff96fb2fd" name="raw_php.y" role="data" />
+   <file baseinstalldir="PHP" md5sum="a5fb44002582c20d62ca28fc8660a429" name="Tokenizer.php" role="php" />
   </dir>
  </contents>
  <dependencies>
@@ -238,6 +223,34 @@ fix phplemon.bat replacements
 - fix Bug #11645: unused rhs labels undetected [r0vert]
 - fix Bug #11647: substitution of @X works incorrectly [r0vert]
 - Bug #10685 	fatal error when calling &quot;phplemon --help&quot;
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.1.7</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2010-10-25</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>
+Automatically built QA release
+Req #11361 better help message - cweiske
+
+Bug #12652 Generated ParseryyToken class has broken __toString() - urkle
+
+Bug #12730 Generated Parser destructor *can* loop forever - urkle
+
+Req #13416 Provide an option to choose the parser template file - rix0r
+
+Bug #16703 terminals starting with Z letter cause problems - taras
+
+Bug #17381 infinite loop in __destruct of generated parser - jespino
+
+Bug #17382 Empty action causes undefined function - jespino
    </notes>
   </release>
  </changelog>
